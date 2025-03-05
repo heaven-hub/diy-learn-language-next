@@ -1,0 +1,6 @@
+{
+    "router.listening":"listening",
+    "router.speaking":"speaking",
+    "router.reading":"reading",
+    "router.writing":"writing"
+}
