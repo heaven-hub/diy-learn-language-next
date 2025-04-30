@@ -1,19 +1,11 @@
-// src/app/api/products/route.js
-import clientPromise from '@/lib/mongodb';
-
-export async function GET(req: any) {
+import db from '@/lib/mongodb';
+import { NextRequest, NextResponse } from 'next/server';
+import { paginate } from '@/lib/dbhandle'
+export async function GET(req: NextRequest,{ params }: { params: { id: string } }) {
     try {
-        const client = await clientPromise;
-        const db = client.db('sample_mflix');  // 默認選擇資料庫，根據你的需求更改
-        const products = await db.collection('users').find().toArray();
-        return new Response(JSON.stringify(products), {
-            status: 200,
-            headers: { 'Content-Type': 'application/json' },
-        });
+        const users = await paginate(db.users) //db.users.find().toArray()
+        return NextResponse.json(users);
     } catch (error) {
-        // console.log('error',error)
-        return new Response('Failed to fetch data', {
-            status: 500,
-        });
+        return NextResponse.json({ error}, { status: 500 });
     }
 }

@@ -1,22 +1,17 @@
-// lib/mongodb.js
-const { MongoClient } = require('mongodb');
+import { MongoClient }from 'mongodb';
+import type { Collection } from 'mongodb';
 const uri = "mongodb+srv://heavenliu66:zSORoD5NG5TZaJPO@cluster0.ldufu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
+const collectionList = ['users','comments','articles','words'] as const
 const client = new MongoClient(uri);
-
 let clientPromise = await client.connect();
+const db = clientPromise.db('sample_mflix');  //資料庫，根據你的需求更改
+type CollectionName = typeof collectionList[number];
+const dbPool:Record<CollectionName, Collection> = {} as Record<CollectionName, Collection>;
 
-// if (process.env.NODE_ENV === 'development') {
-//     // 開發模式下使用全局變量，以避免熱重載時每次重新連接 MongoDB
-//     if (global._mongoClientPromise) {
-//         clientPromise = global._mongoClientPromise;
-//     } else {
-//         global._mongoClientPromise = client.connect();
-//         clientPromise = global._mongoClientPromise;
-//     }
-// } else {
-//     // 生產模式下每次都連接
-//     clientPromise = client.connect();
-// }
+for (let index = 0; index < collectionList.length; index++) {
+    let collectionName:CollectionName = collectionList[index];
+    const collection = await db.collection(collectionName)
+    dbPool[collectionName] = collection
+}
 
-export default clientPromise;
+export default dbPool

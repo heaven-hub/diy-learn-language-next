@@ -1,5 +1,4 @@
-'use client'
-function getVoicesAsync() {
+export function getVoicesAsync() {
     return new Promise((resolve) => {
         let voices = speechSynthesis.getVoices();
         if (voices.length) return resolve(voices);
@@ -19,20 +18,4 @@ async function speakWithVoice(text = 'Weather experts say extreme cold in many p
     utter.rate = 1
     speechSynthesis.cancel(); // 建議先取消前一次的朗讀
     speechSynthesis.speak(utter);
-}
-const testData = async ()=>{
-    const res = await fetch('/api/users');
-    const data = await res.json();
-    console.log('data',data)
-}
-export default function Page() {
-    return (
-        <div>
-            <h1>Listening Page</h1>
-            <p>This is the about page.</p>
-            <button onClick={() => speakWithVoice()}>朗讀</button>
-            <button onClick={testData}>request Data</button>
-            {/* <input type="text" onBlur={(event) => speakWithVoice(event.target.value)} /> */}
-        </div>
-    );
 }

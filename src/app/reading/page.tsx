@@ -28,8 +28,8 @@ const testData = async ()=>{
 export default function Page() {
     return (
         <div>
-            <h1>Listening Page</h1>
-            <p>This is the about page.</p>
+            <h1>reading Page</h1>
+            <p>This is the about reading.</p>
             <button onClick={() => speakWithVoice()}>朗讀</button>
             <button onClick={testData}>request Data</button>
             {/* <input type="text" onBlur={(event) => speakWithVoice(event.target.value)} /> */}
