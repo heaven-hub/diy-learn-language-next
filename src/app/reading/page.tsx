@@ -1,4 +1,5 @@
 'use client'
+import { useTranslation } from 'next-i18next'
 function getVoicesAsync() {
     return new Promise((resolve) => {
         let voices = speechSynthesis.getVoices();
@@ -26,12 +27,14 @@ const testData = async ()=>{
     console.log('data',data)
 }
 export default function Page() {
+    const { t } = useTranslation()
     return (
         <div>
             <h1>reading Page</h1>
             <p>This is the about reading.</p>
             <button onClick={() => speakWithVoice()}>朗讀</button>
             <button onClick={testData}>request Data</button>
+            <div>{t('hello')}</div>
             {/* <input type="text" onBlur={(event) => speakWithVoice(event.target.value)} /> */}
         </div>
     );

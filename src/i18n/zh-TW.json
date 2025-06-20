@@ -1,0 +1,15 @@
+{
+    "collation":"詞集",
+    "listening":"聽",
+    "speaking":"說",
+    "reading":"讀",
+    "writing":"寫",
+    "translation":"翻譯",
+    "original":"原文",
+    "words":"單詞",
+    "phrase":"短語",
+    "sentence":"句子",
+    "article":"文章",
+    "collation.page.header":"收集來的詞匯",
+    "collation.page.header_desc":"詞匯會被自動分成 單詞、短語、句子和文章"
+}

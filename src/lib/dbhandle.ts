@@ -1,7 +1,7 @@
 import type { Collection,Document} from 'mongodb';
 interface PaginateOptions {
     page?: number;
-    pageSize?: number;
+    limit?: number;
     sort?: Record<string, 1 | -1>;
 }
 
@@ -9,7 +9,7 @@ interface PaginateResult {
     data: any[];
     total: number;
     page: number;
-    pageSize: number;
+    limit: number;
     totalPages: number;
 }
 
@@ -24,22 +24,23 @@ export async function paginate(
     query: Document = {},
     options: PaginateOptions = {}
 ): Promise<PaginateResult> {
-    const { page = 1, pageSize = 10, sort = { _id: -1 } } = options;
-
-    const skip = (page - 1) * pageSize;
+    const { page = 1, limit = 10, sort = { _id: -1 } } = options;
+    let pageSize = Number(page)
+    let pageLimit = Number(limit)
+    const skip = (pageSize - 1) * pageLimit;
 
     const [data, total] = await Promise.all([
-        collectionName.find(query).sort(sort).skip(skip).limit(pageSize).toArray(),
+        collectionName.find(query).sort(sort).skip(skip).limit(pageLimit).toArray(),
         collectionName.countDocuments(query),
     ]);
 
-    const totalPages = Math.ceil(total / pageSize);
+    const totalPages = Math.ceil(total / pageLimit);
 
     return {
         data,
         total,
-        page,
-        pageSize,
+        page:pageSize,
+        limit:pageLimit,
         totalPages,
     };
 }

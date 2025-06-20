@@ -1,6 +1,6 @@
 import { MongoClient }from 'mongodb';
 import type { Collection } from 'mongodb';
-const uri = "mongodb+srv://heavenliu66:zSORoD5NG5TZaJPO@cluster0.ldufu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = process.env.MANGO_DB_URI!
 const collectionList = ['users','comments','articles','words'] as const
 const client = new MongoClient(uri);
 let clientPromise = await client.connect();

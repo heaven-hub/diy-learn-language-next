@@ -1,14 +1,15 @@
 "use client"
 import SvgImage from "@/components/svg-image";
 import "./globals.css";
+import '@/i18n'
 import { usePathname,useRouter } from 'next/navigation'
-
+import { useTranslation } from 'next-i18next'
 export default function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const routerList = ['listening','speaking','reading','writing','xmind']
+    const routerList = ['collation','listening','speaking','reading','writing']
     const router = useRouter();
     const pathname = usePathname()
     const toPage = (pageName:string)=>{
@@ -16,17 +17,20 @@ export default function RootLayout({
             router.push(`/${pageName}`,{ scroll: false });
         }
     }
+    const { t } = useTranslation()
+    const currentPath = ()=>{
+        return pathname.slice(1)
+    }
     return (
         <html lang="en">
             <body>
-                <h1>dddd</h1>
                 <div className="flex bg-red">
-                    <ul className="px-[15px] py-[10px]">
+                    { routerList.includes(currentPath())? <ul className="px-[15px] py-[10px]">
                         {
                             routerList.map(item=>{
                                 return (
-                                    <li onClick={()=>toPage(item)} className="flex flex-col items-center mt-[15px] cursor-pointer" key={item}>
-                                        <span>{item.toUpperCase()}</span>
+                                    <li onClick={()=>toPage(item)} className="flex flex-col items-center min-w-[70px] mt-[15px] cursor-pointer" key={item}>
+                                        <span>{t(item)}</span>
                                         <SvgImage
                                             className="dark:invert self-center"
                                             svgName={item}
@@ -38,9 +42,8 @@ export default function RootLayout({
                                 )
                             })
                         }
-
-                    </ul>
-                    <div>{children}</div>
+                    </ul>:''}
+                    <div className="p-[20px]">{children}</div>
                 </div>
             </body>
         </html>
