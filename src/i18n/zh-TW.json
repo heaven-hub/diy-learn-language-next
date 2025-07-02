@@ -12,5 +12,7 @@
     "sentence":"句子",
     "article":"文章",
     "collation.page.header":"收集來的詞匯",
-    "collation.page.header_desc":"詞匯會被自動分成 單詞、短語、句子和文章"
+    "collation.page.header_desc":"詞匯會被自動分成 單詞、短語、句子和文章",
+    "collation.page.header.mode_type.browse":"瀏覽模式",
+    "collation.page.header.mode_type.memory":"記憶模式"
 }

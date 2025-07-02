@@ -1,5 +1,3 @@
-// lib/api.ts
-
 type Method = 'get' | 'post' | 'put' | 'delete';
 
 interface RequestOptions {

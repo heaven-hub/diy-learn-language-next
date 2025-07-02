@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+export default <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="none">
     <path
         d="M23.4044 0H6.69075C2.99555 0 0 2.98608 0 6.6696V23.3304C0 27.0139 2.99555 30 6.69075 30H23.4044C27.0996 30 30.0952 27.0139 30.0952 23.3304V6.6696C30.0952 2.98608 27.0996 0 23.4044 0Z"
         fill="url(#paint0_linear_11216_1189)" />
@@ -64,5 +64,5 @@
             <stop offset="1" stop-color="#830317" stop-opacity="0.3" />
         </linearGradient>
     </defs>
-    <script xmlns="" />
+    <script/>
 </svg>

@@ -17,6 +17,20 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 export async function POST(req: NextRequest) {
     try {
         const query = await req.json(); // 解析 JSON 資料
+        const { id,original, translation='' } = query;
+        if(!!id){
+            await db.words.updateOne({id},{ original, translation })
+        }
+        await db.words.insertOne({ original, translation })
+        return NextResponse.json({ message: 'words saved successfully' }, { status: 200 });
+    } catch (error) {
+        return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
+    }
+}
+
+export async function PUT(req: NextRequest) {
+    try {
+        const query = await req.json(); // 解析 JSON 資料
         const { id,original, translation } = query;
         if(!!id){
             await db.words.updateOne({id},{ original, translation })
