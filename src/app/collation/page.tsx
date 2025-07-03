@@ -1,4 +1,5 @@
 "use client";
+
 import { useState,useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -36,7 +37,7 @@ export default function Page() {
             return ++pre
         })
     }
-    const { words, fetchWords, loading, error } = useWordsStore()
+    const { words, fetchWords } = useWordsStore()
 
     useEffect(() => {
         fetchWords()

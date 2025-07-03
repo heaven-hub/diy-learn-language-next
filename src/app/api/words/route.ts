@@ -1,7 +1,7 @@
 import db from '@/lib/mongodb';
 import { NextRequest, NextResponse } from 'next/server';
 import { paginate } from '@/lib/dbhandle'
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest) {
     const searchParams = req.nextUrl.searchParams;
     const query = Object.fromEntries(searchParams.entries());
     try {

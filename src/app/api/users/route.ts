@@ -1,9 +1,11 @@
 import db from '@/lib/mongodb';
 import { NextRequest, NextResponse } from 'next/server';
 import { paginate } from '@/lib/dbhandle'
-export async function GET(req: NextRequest,{ params }: { params: { id: string } }) {
+export async function GET(req: NextRequest) {
+    const searchParams = req.nextUrl.searchParams;
+    const query = Object.fromEntries(searchParams.entries());
     try {
-        const users = await paginate(db.users) //db.users.find().toArray()
+        const users = await paginate(db.users,{},query) //db.users.find().toArray()
         const response = NextResponse.json(users);
         return response;
     } catch (error) {

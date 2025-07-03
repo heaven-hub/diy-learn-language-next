@@ -10,7 +10,7 @@ interface PropType {
 }
 export default function MemoryCard(modelValue: PropType) {
     const [isShowTrans, setShowTrans] = useState(false)
-    const [isplayVoice, setPlayVoice] = useState(speechSynthesis.speaking)
+    const [isplayVoice, setPlayVoice] = useState(false)
     const nextWord = () => {
         setShowTrans(false)
         modelValue.onNextFun()

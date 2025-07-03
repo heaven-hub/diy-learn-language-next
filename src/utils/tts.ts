@@ -1,3 +1,4 @@
+"use client";
 export function getVoicesAsync() {
     return new Promise((resolve) => {
         let voices = speechSynthesis.getVoices();
