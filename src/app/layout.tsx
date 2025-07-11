@@ -44,7 +44,7 @@ export default function RootLayout({
                             })
                         }
                     </ul>:''}
-                    <div className="flex-1 p-[20px]">{children}</div>
+                    <div className="flex-1 p-[20px] overflow-auto">{children}</div>
                 </div>
             </body>
         </html>

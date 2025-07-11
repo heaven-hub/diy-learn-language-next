@@ -1,13 +1,14 @@
 import { create } from 'zustand'
 import { getWords } from '@/request/words'
-interface Word {
-    id: string
-    original: string
-    translation: string
+interface wordType {
+    _id: string;
+    original: string;
+    translation: string;
+    wordType: "words" | "phrase" | "sentence" | "article";
 }
 
 interface WordsStore {
-    words: Word[]
+    words: wordType[]
     loading: boolean
     error: string | null
     fetchWords: () => Promise<void>
