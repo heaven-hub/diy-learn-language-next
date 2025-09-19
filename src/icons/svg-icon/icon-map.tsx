@@ -9,7 +9,9 @@ import speakingIcon from '../svg/speaking';
 import voicePlayer from '../svg/voice-player';
 import stopVoice from '../svg/stop-voice';
 import xmindIcon from '../svg/xmind';
-
+import addFile from '../svg/add-file';
+import addFolder from '../svg/add-folder';
+import sendIcon from '../svg/send-icon'
 export const iconMap = {
     'not-pass': notPassIcon,
     'info-tips': infoTipsIcon,
@@ -21,7 +23,10 @@ export const iconMap = {
     speaking: speakingIcon,
     reading: readingIcon,
     writing: writingIcon,
-    xmind:xmindIcon
+    xmind:xmindIcon,
+    addFile,
+    addFolder,
+    sendIcon
 };
 
 export type IconName = keyof typeof iconMap;

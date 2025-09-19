@@ -3,7 +3,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { paginate } from '@/lib/dbhandle'
 export async function GET(req: NextRequest) {
     const searchParams = req.nextUrl.searchParams;
+    console.log('searchParams',searchParams)
     const query = Object.fromEntries(searchParams.entries());
+    // console.log('query',query)
     try {
         const words = await paginate(db.words,{},query)
         const response = NextResponse.json(words);

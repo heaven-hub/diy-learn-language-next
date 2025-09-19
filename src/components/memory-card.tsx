@@ -1,7 +1,7 @@
 "use client";
 import SVGIcon from "@/icons/svg-icon";
-import { speakWithVoice, stopVoice } from '@/utils/tts'
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import PlayVoice from "./play-voice";
 interface PropType {
     original: string;
     translation: string;
@@ -10,28 +10,13 @@ interface PropType {
 }
 export default function MemoryCard(modelValue: PropType) {
     const [isShowTrans, setShowTrans] = useState(false)
-    const [isplayVoice, setPlayVoice] = useState(false)
     const nextWord = () => {
         setShowTrans(false)
         modelValue.onNextFun()
     }
-    const controlVoicePlayer = () => {
-        if (isplayVoice) {
-            stopVoice()
-            return
-        }
-        speakWithVoice(modelValue.original, () => setPlayVoice(true), () => setPlayVoice(false))
-    }
-    useEffect(() => {
-        return () => {
-            stopVoice()
-        };
-    }, []);
     return (
         <div className="flex relative flex-col justify-between bg-[#C7EEB7] min-w-[30%] max-w-[80%] min-h-[80%] max-h-[100%] overflow-auto text-center group w-fit shadow-lg rounded-md p-[10px] pt-[25px]">
-            <div className="absolute right-[10px] top-[10px] cursor-pointer" onClick={controlVoicePlayer}>
-                {isplayVoice ? <SVGIcon name="stop-voice" width={25}></SVGIcon> : <SVGIcon name="voice-player" width={25}></SVGIcon>}
-            </div>
+            { modelValue.original && <PlayVoice voiceValue={modelValue.original} className="absolute right-[10px] top-[10px]" /> }
             <div className="text-[18px]">
                 {modelValue.original}
             </div>
