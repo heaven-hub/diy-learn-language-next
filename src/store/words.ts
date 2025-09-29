@@ -1,34 +1,39 @@
 import { create } from 'zustand'
 import { getWords } from '@/request/words'
-interface wordType {
-    _id: string;
-    original: string;
-    translation: string;
-    wordType: "words" | "phrase" | "sentence" | "article";
-}
+import type { wordDataType } from '@/type/words'
 
 interface WordsStore {
-    words: wordType[]
+    words: wordDataType[]
     loading: boolean
     error: string | null
-    fetchWords: () => Promise<void>
+    fetchWords: (params?:any) => Promise<void>
     addWord: (original: string, translation: string) => Promise<void>
 }
 
-export const useWordsStore = create<WordsStore>((set) => ({
+export const useWordsStore = create<WordsStore>((set,get) => ({
     words: [],
     loading: false,
     error: null,
 
-    fetchWords: async () => {
+    fetchWords: async ({page = 1,limit = 0,refresh = false }) => {
         set({ loading: true, error: null })
-        try {
-            const res:any = await getWords({page:1,limit:100})
-            const data = res.data
-            set({ words: data || [], loading: false })
-        } catch (err: any) {
-            set({ error: err.message, loading: false })
-        }
+        return new Promise(async (resolve,reject)=>{
+            const { words } = get()
+            if((!refresh && words.length)){
+                set({ words: words || [], loading: false })
+                resolve(words as any)
+                return
+            }
+            try {
+                const res:any = await getWords({page,limit })
+                const data = res.data
+                set({ words: data || [], loading: false })
+                resolve(data)
+            } catch (err: any) {
+                set({ error: err, loading: false })
+                reject({ error: err })
+            }
+        })
     },
 
     addWord: async (original, translation) => {

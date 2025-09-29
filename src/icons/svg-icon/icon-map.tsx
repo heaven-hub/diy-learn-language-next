@@ -12,6 +12,8 @@ import xmindIcon from '../svg/xmind';
 import addFile from '../svg/add-file';
 import addFolder from '../svg/add-folder';
 import sendIcon from '../svg/send-icon'
+import viewIcon from '../svg/view'
+import noViewIcon from '../svg/no-view'
 export const iconMap = {
     'not-pass': notPassIcon,
     'info-tips': infoTipsIcon,
@@ -26,7 +28,9 @@ export const iconMap = {
     xmind:xmindIcon,
     addFile,
     addFolder,
-    sendIcon
+    sendIcon,
+    viewIcon,
+    noViewIcon
 };
 
 export type IconName = keyof typeof iconMap;
